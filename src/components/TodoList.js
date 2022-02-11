@@ -56,25 +56,35 @@ const TodoList = () => {
             <h1>TODO LIST</h1>
             {todos.map((todo) => 
             <div key={todo.id}>
-                <p>
+                <div>
                     {editId === todo.id ? 
                         (<input type="text"  onChange={(e) => setEditText(e.target.value)} value={editText}/>) 
                         : 
-                        (<>{todo.text}</>)}
+                        (<h3>{todo.text}</h3>)}
                     {" "}
-                    <button onClick={deleteTodo.bind(this,todo.id)}>Delete</button>
-                    {editId === todo.id ? 
-                        (<button onClick={editTodo.bind(this,todo.id)}>Submit Edit</button>) 
-                        : 
-                        (<button onClick={()=>setEditId(todo.id)}>Edit</button>)}
+                    <div className="ui buttons">
+                        <button onClick={deleteTodo.bind(this,todo.id)} className="ui negative button">Delete</button>
+                        <div className="or"></div>
+                        {editId === todo.id ? 
+                            (<button onClick={editTodo.bind(this,todo.id)} className="ui button">Submit Edit</button>) 
+                            : 
+                            (<button onClick={()=>setEditId(todo.id)} className="ui button">Edit</button>)}
+                    </div>
                     {" "}
-                    <input type="checkbox" onChange={statusTodo.bind(this,todo.id)} checked={todo.status}/>
+                    <div className="ui checked checkbox">
+                        <input type="checkbox" onChange={statusTodo.bind(this,todo.id)} checked={todo.status}/>
+                        <label>{todo.status ? ("Selesai") : ("Belum Selesai")}</label>
+                        {console.log(todo.status)}
+                    </div>
                     {console.log(editId)}
-                </p>
+                </div>
             </div>)}
+            <br/>
             <form onSubmit={addTodo}>
-                <input type="text" value={todo} onChange={(e) => {setTodo(e.target.value)}}/>
-                <button>Add Todo</button>
+                <div className="ui input">
+                    <input type="text" value={todo} onChange={(e) => {setTodo(e.target.value)}} placeholder="Nama Todo"/>
+                </div>
+                <button className="ui button">Add Todo</button>
             </form>
         </div>
     )
