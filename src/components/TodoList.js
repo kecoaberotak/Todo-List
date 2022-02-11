@@ -52,24 +52,26 @@ const TodoList = () => {
     }
 
     return (
-        <div>
+        <div className="App">
             <h1>TODO LIST</h1>
             {todos.map((todo) => 
-            <ul key={todo.id}>
-                <li>
+            <div key={todo.id}>
+                <p>
                     {editId === todo.id ? 
                         (<input type="text"  onChange={(e) => setEditText(e.target.value)} value={editText}/>) 
                         : 
                         (<>{todo.text}</>)}
+                    {" "}
                     <button onClick={deleteTodo.bind(this,todo.id)}>Delete</button>
                     {editId === todo.id ? 
                         (<button onClick={editTodo.bind(this,todo.id)}>Submit Edit</button>) 
                         : 
                         (<button onClick={()=>setEditId(todo.id)}>Edit</button>)}
+                    {" "}
                     <input type="checkbox" onChange={statusTodo.bind(this,todo.id)} checked={todo.status}/>
                     {console.log(editId)}
-                </li>
-            </ul>)}
+                </p>
+            </div>)}
             <form onSubmit={addTodo}>
                 <input type="text" value={todo} onChange={(e) => {setTodo(e.target.value)}}/>
                 <button>Add Todo</button>
